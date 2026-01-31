@@ -6,6 +6,8 @@ import boto3
 import uvicorn
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import StreamingResponse
+from fastapi.staticfiles import StaticFiles
+import os
 
 app = FastAPI(title="TinyCloudGallery")
 
@@ -29,7 +31,7 @@ def list_objects() -> dict:
 
 
 @app.post("/upload")
-async def upload_image(file: UploadFile = File(...)) -> dict:
+async def upload_image(image_name: str = None, file: UploadFile = File(...)) -> dict:
     """Upload an image to the tiny-gallery bucket"""
     allowed_extensions = {".jpeg", ".jpg", ".png"}
 
@@ -43,16 +45,18 @@ async def upload_image(file: UploadFile = File(...)) -> dict:
         }
 
     try:
+        # Use provided image_name or fall back to original filename
+        final_name = image_name if image_name else file.filename
         contents = await file.read()
         s3_client.put_object(
             Bucket=BUCKET_NAME,
-            Key=file.filename,
+            Key=final_name,
             Body=contents,
             ContentType=file.content_type
         )
         return {
             "message": "Image uploaded successfully",
-            "filename": file.filename,
+            "filename": final_name,
             "bucket": BUCKET_NAME
         }
     except Exception as e:
@@ -72,5 +76,9 @@ def download_image(image_name: str):
         raise HTTPException(status_code=404, detail=f"Image not found: {str(e)}")
 
 
+# Serve static files - must be last
+app.mount("/", StaticFiles(directory=os.path.dirname(__file__), html=True), name="static")
+
+
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8080)
