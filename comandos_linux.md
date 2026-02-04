@@ -23,6 +23,7 @@ Puedes verificar los permisos con:
 ls -l /ruta/a/tu/llave_privada.pem
 ## Salida esperada: -r-------- 1 usuario usuario 1692 Mar 10 12:34 /ruta/a/tu/llave_privada.pem
 ```
+- Revisar [[recursos/extra/permisos_archivos.md]] para más información sobre permisos de archivos en Linux.
 
 ## SCP
 
