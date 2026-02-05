@@ -1,0 +1,38 @@
+baseURL = "http://localhost:1313/"
+#baseURL = "http://marosalesji-portafolio.com.s3-website-us-east-1.amazonaws.com/"
+title = 'Mi Portafolio'
+theme = 'hugo-theme-console'
+languageCode = 'es'
+
+[params]
+  titleCutting = true
+  animateStyle = "animated zoomIn fast"
+  description = "Your site description"
+  #animateStyle = "animate-fade-up" # Animation style for content
+
+  [[params.navlinks]]
+  name = "about/"
+  url = "about/"
+
+  [[params.navlinks]]
+  name = "posts/"
+  url = "posts/"
+
+  [[params.navlinks]]
+  name = "photos/"
+  url = "photos/"
+
+  [[menu.main]]
+  name = "Inicio"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "Fotos"
+  url = "/photos/"
+  weight = 2
+
+[[menu.main]]
+  name = "Textos"
+  url = "/posts/"
+  weight = 3

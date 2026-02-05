@@ -1,0 +1,3 @@
+[submodule "demos/StaticWebsite/mi-portafolio/themes/hugo-theme-console"]
+	path = demos/StaticWebsite/mi-portafolio/themes/hugo-theme-console
+	url = https://github.com/mrmierzejewski/hugo-theme-console.git
