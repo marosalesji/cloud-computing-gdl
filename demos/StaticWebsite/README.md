@@ -1,135 +1,31 @@
-# Static Website
+# StaticWebsite
 
-## Hugo + Git Submodules + AWS S3
+Para la creación de sitios web estáticos podemos utilizar el servicio de AWS S3
+y configurarlo para permitir que cualquier persona vea nuestra página web.
 
-Vamos a crear un sitio web estático utilizando Hugo, un generador de sitios estáticos rápido y flexible, y
-almacenamiento en la nube con el servicio de Amazon S3.
+## Requisitos
 
-Instalar Hugo
+- Tener una cuenta de AWS o acceso al sandbox de AWS academy
+- Tener AWS CLI instalado
 
-```bash
-# MacOS
-brew install hugo
+## Descripción
 
-# Ubuntu / WSL2
-sudo apt update
-sudo apt install hugo
+En este demo se muestran dos sitios web estáticos
+`mi-website`: es una página web sencilla para demostrar el flujo de trabajo
+`mi-portafolio`: es un portafolio más complicado utilizando el framework Hugo
 
-# Fedora
-sudo dnf update
-sudo dnf install hugo
+Cualquier proyecto de página web estática puede cargarse a un bucket de S3.
 
-# Verificar instalación
-hugo version
-```
+Para poder almacenar un sitio web es necesario crear un bucket en S3 con una
+configuración específica:
+- habilitar `Alojamiento de sitios web estáticos`
+- deshabilitar los bloqueos en `Bloquear acceso público`
+- agregar una política a `Política de bucket`
 
-Clonar este repositorio
+Los pasos están descritos en el siguiente tutorial de AWS [Tutorial: Configuring a static website on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/HostingWebsiteOnS3Setup.html)
 
-```bash
-git clone --recurse-submodules https://github.com/marosalesji/cloud-computing-gdl.git
+## Diagrama del sistema
 
-# Si clonaste sin el flag --recurse-submodules
-cd cloud-computing-gdl
-git submodule update --init --recursive
+Ambos proyectos siguen la siguiente mini arquitectura.
 
-```
-Ejecutar el servidor de desarrollo localmente
-
-```bash
-cd demos/StaticWebsite/mi-portafolio
-hugo server -D
-
-# Accede a http://localhost:1313
-# El flag `-D` muestra posts en borrador.
-```
-
-##  Estructura del proyecto
-
-Este proyecto usa **Git submodules** para gestionar el tema Hugo. Esto significa:
-
-- El tema está versionado en Git
-- Otros desarrolladores lo descargan automáticamente
-- Puedes actualizar a nuevas versiones del tema
-- Separación clara entre tu código y dependencias
-
-Carpeta del Tema
-
-```
-mi-portafolio/themes/hugo-theme-console/  ← Git submodule
-```
-
-**NO edites archivos aquí directamente.** Para personalizar, copia archivos a `layouts/` en la raíz del proyecto.
-
-Para crear contenido:
-
-```bash
-# Nueva entrada de blog
-hugo new posts/mi-primer-post.md
-vi content/posts/mi-primer-post.md
-
-# Agregar fotos
-hugo new photos/mi-galeria.md
-```
-
-### Estructura de secciones
-- `content/posts/` -> Blog posts
-- `content/photos/` -> Galerías de fotos
-- `content/about/` -> Página sobre ti
-
-## Configuración Inicial
-
-Edita `hugo.toml` en la raíz de `mi-portafolio/`:
-
-```toml
-baseURL = "http://localhost:1313/"
-languageCode = "es"
-title = "Mi Portafolio"
-theme = "hugo-theme-console"
-
-[params]
-  titleCutting = true
-  animateStyle = "animated zoomIn fast"
-```
-
-## Administración de Submodules
-
-Actualizar el tema a la última versión
-
-```bash
-cd mi-portafolio
-git submodule update --remote
-```
-
-Ver el commit exacto del tema
-```bash
-git ls-files --stage themes/hugo-theme-console
-```
-
-## Despliegue en AWS S3
-
-Para generar el sitio estático listo para producción:
-
-```bash
-cd mi-portafolio
-hugo
-```
-
-Los archivos estáticos estarán en `public/`.
-
-Instalar AWS CLI si no está instalado
-
-Configurar las credenciales de AWS y sincronizar la carpeta `public` con el bucket de S3.
-
-```
-# Configurar AWS CLI
-~/.aws/credentials
-
-# Sync public folder to S3 bucket
-aws s3 sync public s3://marosalesji-portafolio.com
-```
-
-## Recursos
-
-- [Hugo Quick Start](https://gohugo.io/getting-started/quick-start/)
-- [Hugo Theme Console](https://github.com/mrmierzejewski/hugo-theme-console)
-- [Git Submodules Guide](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
+![Diagrama del sistema](diagram.png)
