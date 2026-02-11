@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Movies Catalog</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        text-align: center;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    #result {
+        margin-top: 20px;
+        font-size: 20px;
+        color: #333;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Movies Catalog</h1>
+    <button onclick="fetchComedy()">Número de Comedias</button>
+    <div id="result"></div>
+</div>
+
+<script>
+function fetchComedy() {
+    fetch('/comedy')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('result').innerText = 'Películas con Comedy: ' + data.count;
+        })
+        .catch(err => {
+            document.getElementById('result').innerText = 'Error: ' + err;
+        });
+}
+</script>
+</body>
+</html>
