@@ -1,0 +1,81 @@
+{
+  "ProductCatalog": [
+    {
+      "PutRequest": {
+        "Item": {
+          "precio": { "N": "79.90" },
+          "nombre": { "S": "Aceite Vegetal 1L" },
+          "producto_id": { "S": "PROD-003" },
+          "activo": { "N": "1" },
+          "proveedor": {
+            "M": {
+              "prov_id": { "S": "PROV-100" },
+              "nombre": { "S": "Aceites del Valle S.A." },
+              "contacto": {
+                "M": {
+                  "telefono": { "S": "+52-33-1234-5678" },
+                  "email": { "S": "ventas@aceitesvalle.mx" }
+                }
+              }
+            }
+          },
+          "categorias": { "SS": ["Aceites", "Cocina"] },
+          "stock": {
+            "M": {
+              "cantidad": { "N": "200" },
+              "unidad": { "S": "botellas" }
+            }
+          },
+          "imagenes": {
+            "L": [
+              { "S": "https://cdn.tienda/aceite-1.jpg" }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "precio": { "N": "28.00" },
+          "nombre": { "S": "Azúcar Refinada 1kg" },
+          "producto_id": { "S": "PROD-004" },
+          "activo": { "N": "1" },
+          "peso": {
+            "M": {
+              "valor": { "N": "1000" },
+              "unidad": { "S": "g" }
+            }
+          },
+          "descuento": {
+            "M": {
+              "porcentaje": { "N": "10" },
+              "activo": { "N": "1" },
+              "fecha_inicio": { "S": "2026-02-01" },
+              "fecha_fin": { "S": "2026-02-15" }
+            }
+          },
+          "tags": { "SS": ["endulzante", "panaderia"] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "precio": { "N": "20.00" },
+          "nombre": { "S": "Frijol Negro 400g" },
+          "producto_id": { "S": "PROD-005" },
+          "activo": { "N": "1" },
+          "origen": { "S": "Chiapas" },
+          "organico": { "N": "0" },
+          "ingredientes": {
+            "L": [
+              { "S": "Frijol Negro" }
+            ]
+          },
+          "lote": { "S": "LOTE-20260206" }
+        }
+      }
+    }
+  ]
+}

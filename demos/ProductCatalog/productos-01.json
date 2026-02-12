@@ -1,0 +1,24 @@
+{
+  "ProductCatalog": [
+    {
+      "PutRequest": {
+        "Item": {
+          "precio": { "N": "24.50" },
+          "nombre": { "S": "Arroz Blanco 1kg" },
+          "producto_id": { "S": "PROD-001" },
+          "activo": { "N": "1" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "precio": { "N": "32.00" },
+          "nombre": { "S": "Frijol Negro 900g" },
+          "producto_id": { "S": "PROD-002" },
+          "activo": { "N": "1" }
+        }
+      }
+    }
+  ]
+}
