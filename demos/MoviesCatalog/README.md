@@ -91,7 +91,7 @@ y bloquea el acceso público.
 
 ```
 # Crear instancia RDS PostgreSQL
-export RDSPASS="Password123!"
+export RDSPASS=Password123!
 aws rds create-db-instance \
   --db-instance-identifier demo-moviescat-db \
   --db-instance-class db.t3.micro \
@@ -128,12 +128,18 @@ En la instancia de EC2 instalar el cliente de PostgreSQL
 ```
 sudo apt update
 sudo apt install -y unzip
-sudo apt install postgresql-client-15
 unzip movielens.zip
 ```
 
-Conectarse a la base de datos RDS desde la instancia de EC2
+Para instalar `psql` es necesario actualizar los repositorios de APT
+Es necesario revisar esta guia primero [Instalacion Linux Postgres](https://www.postgresql.org/download/linux/ubuntu/)
+```
+# Instalar psql
+sudo apt install postgresql-client-18
+sudo apt install postgresql-18
+```
 
+Conectarse a la base de datos RDS desde la instancia de EC2
 ```
 # Buscar el endpoint de RDS en la consola
 export RDSHOST="demo-moviescat-db.<buscar-en-la-consola>.us-east-1.rds.amazonaws.com"
@@ -151,21 +157,32 @@ CREATE TABLE movies (
     genres      TEXT
 );
 
-
-
-
-ALTER TABLE movies
-ALTER COLUMN movieid ADD GENERATED ALWAYS AS IDENTITY;
-SELECT setval(pg_get_serial_sequence('movies','movieid'), (SELECT MAX(movieid) FROM movies));
-
-
 \copy movies FROM '/home/ubuntu/ml-latest-small/movies.csv' DELIMITER ',' CSV HEADER;
-
 
 # Ya podemos hacer consultas - el resultado es 3756
 SELECT COUNT(*) FROM movies WHERE genres ILIKE '%comedy%';
 ```
 
+## Copiar código de la aplicación a la instancia de EC2
+
+```
+# Desde nuestra terminal hay que copiar el codigo src a la instancia de EC2
+scp -i demo-movies-key.pem -r src ubuntu@$EC2IP:/home/ubuntu
+
+# Hacemos login nuevamente a la instancia de EC2 y corremos la app de python
+ssh -i demo-movies-key.pem ubuntu@${EC2IP}
+cd src
+
+# run the server
+python3.13 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python main.py
+
+```
+
+En el navegador podemos entrar a la IP de la instancia EC2 al puerto 8080
+
+
 ## Referencias
 - [MovieLens Dataset](https://grouplens.org/datasets/movielens/)
-- [Instalacion Linux Postgres](https://www.postgresql.org/download/linux/ubuntu/)
