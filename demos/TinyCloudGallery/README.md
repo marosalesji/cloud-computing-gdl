@@ -22,13 +22,13 @@ Crear instancia de EC2
 export AWS_PAGER=cat
 
 # Crear key pair
-aws ec2 create-key-pair --key-name demo-tcg-key --query 'KeyMaterial' --output text > demo-tcg-key.pem
+aws ec2 create-key-pair --key-name demo-tcg-key --query 'KeyMaterial' --output text --region us-east-1 > demo-tcg-key.pem
 chmod 400 demo-tcg-key.pem
 
 # Crear grupos de seguridad
 aws ec2 create-security-group --group-name demo-tcg-sg --description "Security group para Tiny Cloud Gallery" --region us-east-1
-aws ec2 authorize-security-group-ingress --group-id <sg-id> --protocol tcp --port 22 --cidr 0.0.0.0/0
-aws ec2 authorize-security-group-ingress --group-id <sg-id> --protocol tcp --port 8080 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id <sg-id> --protocol tcp --port 22 --cidr 0.0.0.0/0 --region us-east-1
+aws ec2 authorize-security-group-ingress --group-id <sg-id> --protocol tcp --port 8080 --cidr 0.0.0.0/0 --region us-east-1
 
 aws ec2 describe-security-groups --group-ids <sg-id> --query 'SecurityGroups[].IpPermissions'
 
