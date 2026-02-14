@@ -149,3 +149,8 @@ aws ec2 delete-key-pair \
 
 rm demo-tcg-key.pem
 ```
+
+# Extra Tips
+
+Un error común al darle nombre a un bucket es que no sea único. Es buena idea
+revisar las recomendaciones para nombrar el bucket https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
