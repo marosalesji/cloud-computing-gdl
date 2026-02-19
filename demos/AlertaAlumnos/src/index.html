@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AlertaAlumnos</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      width: 350px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #5568d3;
+    }
+    .message {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+    .success { color: green; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Enviar Alerta</h2>
+    <input type="text" id="alertInput" placeholder="Escribe tu alerta">
+    <button onclick="sendAlert()">Enviar</button>
+    <div id="status" class="message"></div>
+  </div>
+
+  <script>
+    const API_URL = `${window.location.protocol}//${window.location.hostname}:${window.location.port}`;
+
+    function sendAlert() {
+      const input = document.getElementById("alertInput");
+      const status = document.getElementById("status");
+      const alertText = input.value.trim();
+
+      if (!alertText) {
+        status.textContent = "Por favor escribe una alerta";
+        status.className = "message error";
+        return;
+      }
+
+      const timestamp = new Date().toISOString();
+      const fullMessage = `lluvia_intensa|${alertText}|${timestamp}`;
+
+      fetch(`${API_URL}/send-alert`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: fullMessage })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.sns_message_id) {
+          status.textContent = "Alerta enviada con éxito!";
+          status.className = "message success";
+          input.value = "";
+        } else if (data.detail) {
+          status.textContent = "Error: " + data.detail;
+          status.className = "message error";
+        } else {
+          status.textContent = "Error desconocido";
+          status.className = "message error";
+        }
+      })
+      .catch(err => {
+        status.textContent = "Error enviando alerta: " + err.message;
+        status.className = "message error";
+      });
+    }
+  </script>
+</body>
+</html>
