@@ -1,5 +1,8 @@
 provider "aws" {
-  region = var.region
+  region     = var.region
+  access_key = sensitive(var.aws_access_key_id)
+  secret_key = sensitive(var.aws_secret_access_key)
+  token      = sensitive(var.aws_session_token)
 }
 
 ### VPC default existente
@@ -7,8 +10,15 @@ data "aws_vpc" "default" {
   default = true
 }
 
-data "aws_subnet_ids" "default" {
-  vpc_id = data.aws_vpc.default.id
+data "aws_subnets" "default" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
+  filter {
+    name   = "availability-zone"
+    values = ["us-east-1b"]
+  }
 }
 
 ### AMI Amazon Linux 2
@@ -71,7 +81,7 @@ resource "aws_security_group" "k3s" {
 resource "aws_instance" "controller" {
   ami                    = data.aws_ami.amazon_linux.id
   instance_type          = "t3.large"
-  subnet_id              = data.aws_subnet_ids.default.ids[0]
+  subnet_id              = data.aws_subnets.default.ids[0]
   key_name               = aws_key_pair.k3s.key_name
   vpc_security_group_ids = [aws_security_group.k3s.id]
 
@@ -88,7 +98,7 @@ resource "aws_instance" "controller" {
 resource "aws_instance" "worker" {
   ami                    = data.aws_ami.amazon_linux.id
   instance_type          = "t3.large"
-  subnet_id              = data.aws_subnet_ids.default.ids[0]
+  subnet_id              = data.aws_subnets.default.ids[0]
   key_name               = aws_key_pair.k3s.key_name
   vpc_security_group_ids = [aws_security_group.k3s.id]
 

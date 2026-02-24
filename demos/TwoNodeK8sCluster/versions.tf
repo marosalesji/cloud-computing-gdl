@@ -1,5 +1,12 @@
 terraform {
-  required_version = "= 1.14.5"
+  cloud {
+    organization = "cloud-computing-gdl"
+    workspaces {
+      name = "TwoNodeK8sCluster"
+    }
+  }
+
+  required_version = ">= 1.8.0"
 
   required_providers {
     aws = {

@@ -1,0 +1,58 @@
+# Terraform
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.*
+crash.log
+crash.*.log
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# SSH Keys and Certificates
+*.pem
+*.pub
+*.ppk
+*.key
+*.crt
+*.cer
+*.pfx
+*.p12
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Temporary files
+tmp.txt
+*.tmp
+*.temp
+.cache/
+
+# Environment and credentials
+.env
+.env.local
+*.env
+kubeconfig
+kubeconfig.yaml
+config
+
+# OS specific
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# Logs
+*.log
+logs/
