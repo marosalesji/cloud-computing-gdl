@@ -21,14 +21,29 @@ data "aws_subnets" "default" {
   }
 }
 
-### AMI Amazon Linux 2
-data "aws_ami" "amazon_linux" {
+### AMI ubuntu
+data "aws_ami" "ubuntu" {
   most_recent = true
-  owners      = ["amazon"]
+  owners      = ["099720109477"] # Canonical
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+    values = ["ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
   }
 }
 
@@ -79,7 +94,7 @@ resource "aws_security_group" "k3s" {
 
 ### Controller
 resource "aws_instance" "controller" {
-  ami                    = data.aws_ami.amazon_linux.id
+  ami                    = data.aws_ami.ubuntu.id
   instance_type          = "t3.large"
   subnet_id              = data.aws_subnets.default.ids[0]
   key_name               = aws_key_pair.k3s.key_name
@@ -96,7 +111,7 @@ resource "aws_instance" "controller" {
 
 ### Worker
 resource "aws_instance" "worker" {
-  ami                    = data.aws_ami.amazon_linux.id
+  ami                    = data.aws_ami.ubuntu.id
   instance_type          = "t3.large"
   subnet_id              = data.aws_subnets.default.ids[0]
   key_name               = aws_key_pair.k3s.key_name

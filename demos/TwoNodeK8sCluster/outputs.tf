@@ -12,5 +12,5 @@ output "ssh_private_key" {
 }
 
 output "kubeconfig_hint" {
-  value = "ssh ec2-user@${aws_instance.controller.public_ip} 'sudo cat /etc/rancher/k3s/k3s.yaml'"
+  value = "ssh ubuntu@${aws_instance.controller.public_ip} 'sudo cat /etc/rancher/k3s/k3s.yaml'"
 }
