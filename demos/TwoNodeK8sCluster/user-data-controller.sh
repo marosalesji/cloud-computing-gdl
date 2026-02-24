@@ -1,9 +1,9 @@
 #!/bin/bash
+
 set -eofx
 
 echo "==== Iniciando user-data para Ubuntu ===="
 
-# --- SELinux (Ubuntu normalmente NO lo tiene) ---
 if command -v sestatus >/dev/null 2>&1; then
   echo "SELinux detectado. Desactivándolo..."
   sudo setenforce 0 || true
@@ -12,21 +12,18 @@ else
   echo "SELinux no está presente (normal en Ubuntu)"
 fi
 
-# --- Desactivar AppArmor (recomendado para K3s en Ubuntu) ---
 echo "Desactivando AppArmor..."
 sudo systemctl stop apparmor || true
 sudo systemctl disable apparmor || true
 
-# --- Actualizar sistema ---
 echo "Actualizando paquetes (apt)..."
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
-# --- Dependencias básicas ---
 echo "Instalando dependencias..."
 sudo apt-get install -y curl ca-certificates gnupg lsb-release
 
-# --- Obtener IP pública (EC2) ---
+# --- Obtener IP pública y privada (EC2) ---
 TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" \
   -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
 PUBLIC_IP=$(curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \
@@ -47,3 +44,36 @@ bash
 echo "K3s Controller instalado"
 sleep 5
 sudo systemctl status k3s --no-pager || true
+
+# --- Configurar kubectl sin sudo para el usuario ubuntu ---
+echo "Configurando kubectl para el usuario ubuntu..."
+
+mkdir -p /home/ubuntu/.kube
+
+sudo cp /etc/rancher/k3s/k3s.yaml /home/ubuntu/.kube/config
+sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube/config
+chmod 600 /home/ubuntu/.kube/config
+
+# Exportar KUBECONFIG
+if ! grep -q 'KUBECONFIG=.*/.kube/config' /home/ubuntu/.bashrc; then
+  echo 'export KUBECONFIG=$HOME/.kube/config' >> /home/ubuntu/.bashrc
+fi
+
+echo "Configurando carga de .bashrc para el usuario ubuntu..."
+UBUNTU_HOME="/home/ubuntu"
+PROFILE_FILE="$UBUNTU_HOME/.profile"
+
+touch "$PROFILE_FILE"
+chown ubuntu:ubuntu "$PROFILE_FILE"
+
+if ! grep -q "Load bashrc if present" "$PROFILE_FILE"; then
+  cat << 'EOF' >> "$PROFILE_FILE"
+
+# Load bashrc if present
+if [ -f "$HOME/.bashrc" ]; then
+  . "$HOME/.bashrc"
+fi
+EOF
+fi
+
+chown ubuntu:ubuntu "$PROFILE_FILE"
