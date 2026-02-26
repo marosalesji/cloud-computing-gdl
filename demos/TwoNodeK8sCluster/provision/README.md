@@ -84,3 +84,6 @@ sudo kubectl get nodes -o wide
 sudo systemctl status k3s-agent --no-pager
 sudo journalctl -u k3s-agent -n 50 --no-pager
 ```
+
+## References
+- [k3s](https://k3s.io/)
