@@ -1,7 +1,7 @@
 # Kanban
 
-Para esta actividad deberás desarrollar un backend en la nube para administrar tareas siguiendo el sistema de trabajo
-[kanban](https://es.wikipedia.org/wiki/Kanban).
+Para esta actividad deberás desarrollar un backend en la nube de AWS para administrar tareas siguiendo el sistema
+de trabajo [kanban](https://es.wikipedia.org/wiki/Kanban).
 
 Kanban es un sistema de control de actividades que modela el flujo de trabajo mediante tareas que avanzan entre
 distintos estados.
