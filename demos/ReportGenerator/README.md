@@ -31,7 +31,7 @@ Para crear el workflow en step functions usaremos AWS Management Console, se lla
 Es necesario ponerle `LabRole` para que pueda usar las lambdas. También hay que configurar el
 ARN del workflow como variable de ambiente en validate_reporte.
 
-(Amazon state language ASL)[https://states-language.net/]
+[Amazon state language ASL](https://states-language.net/)
 
 ## Flujo de la aplicación
 
