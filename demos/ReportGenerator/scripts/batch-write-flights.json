@@ -1,0 +1,24 @@
+{
+  "RegistroDespegue": [
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL001"},"origen":{"S":"MEX"},"ciudad_origen":{"S":"Ciudad de México"},"destino":{"S":"GDL"},"ciudad_destino":{"S":"Guadalajara"},"fecha_salida":{"S":"2026-03-05"},"hora_salida":{"S":"08:00"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL002"},"origen":{"S":"MEX"},"ciudad_origen":{"S":"Ciudad de México"},"destino":{"S":"MTY"},"ciudad_destino":{"S":"Monterrey"},"fecha_salida":{"S":"2026-03-05"},"hora_salida":{"S":"12:30"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL003"},"origen":{"S":"GDL"},"ciudad_origen":{"S":"Guadalajara"},"destino":{"S":"MEX"},"ciudad_destino":{"S":"Ciudad de México"},"fecha_salida":{"S":"2026-03-06"},"hora_salida":{"S":"09:15"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL004"},"origen":{"S":"GDL"},"ciudad_origen":{"S":"Guadalajara"},"destino":{"S":"TIJ"},"ciudad_destino":{"S":"Tijuana"},"fecha_salida":{"S":"2026-03-06"},"hora_salida":{"S":"18:45"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL005"},"origen":{"S":"MTY"},"ciudad_origen":{"S":"Monterrey"},"destino":{"S":"MEX"},"ciudad_destino":{"S":"Ciudad de México"},"fecha_salida":{"S":"2026-03-07"},"hora_salida":{"S":"07:00"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL006"},"origen":{"S":"MTY"},"ciudad_origen":{"S":"Monterrey"},"destino":{"S":"CUN"},"ciudad_destino":{"S":"Cancún"},"fecha_salida":{"S":"2026-03-07"},"hora_salida":{"S":"15:20"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL007"},"origen":{"S":"CUN"},"ciudad_origen":{"S":"Cancún"},"destino":{"S":"MEX"},"ciudad_destino":{"S":"Ciudad de México"},"fecha_salida":{"S":"2026-03-08"},"hora_salida":{"S":"10:00"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL008"},"origen":{"S":"CUN"},"ciudad_origen":{"S":"Cancún"},"destino":{"S":"GDL"},"ciudad_destino":{"S":"Guadalajara"},"fecha_salida":{"S":"2026-03-08"},"hora_salida":{"S":"17:30"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL009"},"origen":{"S":"TIJ"},"ciudad_origen":{"S":"Tijuana"},"destino":{"S":"GDL"},"ciudad_destino":{"S":"Guadalajara"},"fecha_salida":{"S":"2026-03-09"},"hora_salida":{"S":"06:45"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL010"},"origen":{"S":"TIJ"},"ciudad_origen":{"S":"Tijuana"},"destino":{"S":"MEX"},"ciudad_destino":{"S":"Ciudad de México"},"fecha_salida":{"S":"2026-03-09"},"hora_salida":{"S":"14:10"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL011"},"origen":{"S":"MEX"},"ciudad_origen":{"S":"Ciudad de México"},"destino":{"S":"CUN"},"ciudad_destino":{"S":"Cancún"},"fecha_salida":{"S":"2026-03-10"},"hora_salida":{"S":"09:00"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL012"},"origen":{"S":"MEX"},"ciudad_origen":{"S":"Ciudad de México"},"destino":{"S":"TIJ"},"ciudad_destino":{"S":"Tijuana"},"fecha_salida":{"S":"2026-03-10"},"hora_salida":{"S":"21:00"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL013"},"origen":{"S":"GDL"},"ciudad_origen":{"S":"Guadalajara"},"destino":{"S":"MTY"},"ciudad_destino":{"S":"Monterrey"},"fecha_salida":{"S":"2026-03-11"},"hora_salida":{"S":"11:40"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL014"},"origen":{"S":"GDL"},"ciudad_origen":{"S":"Guadalajara"},"destino":{"S":"CUN"},"ciudad_destino":{"S":"Cancún"},"fecha_salida":{"S":"2026-03-11"},"hora_salida":{"S":"19:30"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL015"},"origen":{"S":"MTY"},"ciudad_origen":{"S":"Monterrey"},"destino":{"S":"GDL"},"ciudad_destino":{"S":"Guadalajara"},"fecha_salida":{"S":"2026-03-12"},"hora_salida":{"S":"08:10"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL016"},"origen":{"S":"MTY"},"ciudad_origen":{"S":"Monterrey"},"destino":{"S":"TIJ"},"ciudad_destino":{"S":"Tijuana"},"fecha_salida":{"S":"2026-03-12"},"hora_salida":{"S":"16:50"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL017"},"origen":{"S":"CUN"},"ciudad_origen":{"S":"Cancún"},"destino":{"S":"MTY"},"ciudad_destino":{"S":"Monterrey"},"fecha_salida":{"S":"2026-03-13"},"hora_salida":{"S":"07:30"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL018"},"origen":{"S":"CUN"},"ciudad_origen":{"S":"Cancún"},"destino":{"S":"TIJ"},"ciudad_destino":{"S":"Tijuana"},"fecha_salida":{"S":"2026-03-13"},"hora_salida":{"S":"20:15"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL019"},"origen":{"S":"TIJ"},"ciudad_origen":{"S":"Tijuana"},"destino":{"S":"CUN"},"ciudad_destino":{"S":"Cancún"},"fecha_salida":{"S":"2026-03-14"},"hora_salida":{"S":"09:50"}}}},
+    {"PutRequest":{"Item":{"flight_id":{"S":"FL020"},"origen":{"S":"MEX"},"ciudad_origen":{"S":"Ciudad de México"},"destino":{"S":"MTY"},"ciudad_destino":{"S":"Monterrey"},"fecha_salida":{"S":"2026-03-14"},"hora_salida":{"S":"18:00"}}}}
+  ]
+}
