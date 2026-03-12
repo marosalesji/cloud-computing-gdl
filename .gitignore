@@ -8,3 +8,6 @@ __pycache__
 ml-latest-small
 aws-academy/*
 tmp/*
+*.tfstate
+*.backup
+*.tfvars
