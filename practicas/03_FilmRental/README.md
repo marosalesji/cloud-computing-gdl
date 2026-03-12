@@ -301,3 +301,4 @@ Todos los integrantes participan. El video debe mostrar:
 
 - Demo MoviesCatalog: https://github.com/marosalesji/cloud-computing-gdl/tree/main/demos/MoviesCatalog
 - Demo ReportGenerator: https://github.com/marosalesji/cloud-computing-gdl/tree/main/demos/ReportGenerator
+- Demo AlertaAlumnos: https://github.com/marosalesji/cloud-computing-gdl/tree/main/demos/AlertaAlumnos
