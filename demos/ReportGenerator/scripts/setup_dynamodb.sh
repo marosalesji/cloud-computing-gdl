@@ -3,7 +3,6 @@ set -e
 
 REGION=us-east-1
 TABLE_NAME="RegistroDespegue"
-DATA_FILE="data/flights.json"
 GSI_NAME="FechaIndex"
 
 # Crear tabla DynamoDB
