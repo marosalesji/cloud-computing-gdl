@@ -1,0 +1,5 @@
+
+ssh
+curl
+puertos
+netstat

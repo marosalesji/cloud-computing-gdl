@@ -1,0 +1,5 @@
+
+ps
+kill
+background
+foreground

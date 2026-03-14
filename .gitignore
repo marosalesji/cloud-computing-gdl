@@ -11,3 +11,4 @@ tmp/*
 *.tfstate
 *.backup
 *.tfvars
+.terraform
