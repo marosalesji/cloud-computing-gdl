@@ -65,7 +65,7 @@ Actividades guiadas para aprender sobre contenedores y orquestadores.
 
 |Tema|Descripción|Ejercicio|
 |---|---|---|
-||Provision de un EC2 y S3|[Blueprint](demos/Blueprint)|
+|Terraform|Provision de un EC2 y S3|[Blueprint](demos/Blueprint)|
 |Docker|||
 |Kubernetes||
 
