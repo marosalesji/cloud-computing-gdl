@@ -40,23 +40,21 @@ Desde el directorio `demos/MoviesSearch`:
 # Construir la imagen
 docker build -t movies-search .
 
-# Correr el contenedor montando las credenciales de AWS
-docker run -p 8080:8080 \
-  -v ~/.aws:/root/.aws:ro \
-  -e SECRET_NAME="videoclub/moviesearch/credentials" \
-  -e AWS_REGION="us-east-1" \
+docker run \
+  -p 8080:8080 \              # expone el puerto 8080 del contenedor en tu laptop
+  -v ~/.aws:/root/.aws:ro \   # monta tus credenciales de AWS en modo solo lectura
+  -e SECRET_NAME="videoclub/moviesearch/credentials" \  # nombre del secret en AWS
+  -e AWS_REGION="us-east-1" \ # región de AWS
   movies-search
 ```
 
 El subcomando `run` recibe los siguientes parámetros:
-- `-p`: conectar un puerto del host machine con el contenedor
-- `-v`: conectar como un volumen en el contenedor un path en el host machine
+- `-p`: expone un puerto del contenedor en el host machine
+- `-v`: monta el directorio de credenciales del host machine dentro del contenedor
 - `-e`: pasar una variable de ambiente al contenedor
 
-El flag `-v ~/.aws:/root/.aws:ro` monta el directorio de credenciales de tu laptop dentro del contenedor en modo de solo
-lectura. Así el contenedor puede autenticarse con AWS sin que tengas que copiar y pegar credenciales.
-
 Probar la app:
+
 ```bash
 # Buscar por género
 curl "http://localhost:8080/movies?genre=comedy"
