@@ -43,7 +43,7 @@ def search_movies(
                     FROM movies
                     WHERE genres ILIKE %s AND title ILIKE %s
                     ORDER BY title
-                    LIMIT 20
+                    LIMIT 1
                 """, (f"%{genre}%", f"%{title}%"))
             elif genre:
                 cur.execute("""
@@ -51,7 +51,7 @@ def search_movies(
                     FROM movies
                     WHERE genres ILIKE %s
                     ORDER BY title
-                    LIMIT 20
+                    LIMIT 1
                 """, (f"%{genre}%",))
             else:
                 cur.execute("""
@@ -59,7 +59,7 @@ def search_movies(
                     FROM movies
                     WHERE title ILIKE %s
                     ORDER BY title
-                    LIMIT 20
+                    LIMIT 1
                 """, (f"%{title}%",))
 
             rows = cur.fetchall()

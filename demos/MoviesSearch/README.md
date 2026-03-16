@@ -29,7 +29,7 @@ y cargar el dataset de MovieLens.
 - `scripts/setup-secrests.sh` - crea los secrets para RDS
 
 
-## Demo: Docker
+## Demo 1: Docker
 
 Esta parte del demo se enfoca en la creacion de la imagen de docker con el comando `build` y en el spin del contenedor
 con el comando `run`.
@@ -71,7 +71,7 @@ curl "http://localhost:8080/movies?genre=comedy&title=toy"
 curl http://localhost:8080/health
 ```
 
-## Demo: Docker Hub
+## Demo 2: Docker Hub
 
 Para subir la imagen construida en la primera parte de este demo a Docker Hub es necesario tener cuenta primero y después hacer login.
 
@@ -101,47 +101,34 @@ docker tag movies-search $DOCKER_HUB_USER/movies-search:v1.0
 docker push $DOCKER_HUB_USER/movies-search:v1.0
 ```
 
-Ahora hay que realizar un cambio en el código del contenedor, por ejemplo cambiar el limit de las queries a 1.
+Ahora hay que realizar un cambio en el código del contenedor, por ejemplo cambiar el LIMIT de las queries a 1.
 
+Queremos actualizar la imagen de este proyecto en Docker Hub, pero como es una imagen diferente hay que actualizar su versión,
+esto se ve reflejado en la versión con la que etiquetamos la imagen y cuando hacemos el push.
 
-## Actualizar la imagen después de cambios
 ```bash
 # Reconstruir la imagen
 docker build -t movies-search .
 
-# Volver a etiquetar y publicar
+# Etiquetar como latest y v1.1
+docker tag movies-search $DOCKER_HUB_USER/movies-search:latest
+docker tag movies-search $DOCKER_HUB_USER/movies-search:v1.1
+
+# Publicar
 docker push $DOCKER_HUB_USER/movies-search:latest
+docker push $DOCKER_HUB_USER/movies-search:v1.1
 ```
 
-## Comandos útiles
-```bash
-# Ver contenedores corriendo
-docker ps
+Ahora si vamos a Docker Hub vamos a ver 3 imágenes. Una es `latest` y `v1.1`, las cuales son iguales y regresan la query con un `LIMIT 1`.
+Tambien tenemos `v1.0` la cual es la version anterior que regresa con el `LIMIT 20`.
 
-# Ver todas las imágenes locales
-docker images
-
-# Entrar al contenedor con bash
-docker exec -it <container-id> bash
-
-# Detener y eliminar el contenedor
-docker rm -f <container-id>
+Es posible descargar una version especifica con este comando.
 ```
-
-## Troubleshooting
-
-### Error de red al hacer build
-
-Si al correr `docker build` aparece un error como `operation not supported` o `failed to create endpoint`, prueba agregando `--network host`:
-```bash
-docker build --network host -t movies-search .
-```
-
-Si el problema persiste, intenta reiniciar el daemon de Docker:
-```bash
-sudo systemctl restart docker
+docker pull $DOCKER_HUB_USER/movies-search:v1.0
+docker pull $DOCKER_HUB_USER/movies-search:v1.1
 ```
 
 ## Referencias
+- [Docker Comandos y troubleshooting](../../docs/linux/docker.md)
 - [MovieLens Dataset](https://grouplens.org/datasets/movielens/)
 - [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/)
