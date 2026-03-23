@@ -29,7 +29,7 @@ docker ps --help
 
 ```bash
 docker image pull alpine
-docker image ubuntu:24.04
+docker image pull ubuntu:24.04
 ```
 Puedes buscar en docker hub más imágenes
 
@@ -155,12 +155,18 @@ terminal.
 
 ¿dónde está el volumen app2-data en el contenedor?
 
+¿y dónde está el volumen en el host?
+
+```bash
+docker volume inspect app2-data
+```
+
 Docker no elimina sus componentes y esto podría causar un problema de
 almacenamiento en tu computadora. El comando prune ayuda a eliminar lo que no
 está en uso, en este caso volúmenes.
 
 ```bash
-docker volume
+docker volume ls
 docker volume prune
 ```
 
@@ -185,7 +191,24 @@ Podemos ver los logs asi
 docker container logs app3-app-1
 ```
 
+```bash
+docker compose down -v
+```
+
+## 7. Docker Hub
+
+Vamos a empujar app1 a Docker Hub
+
+```
+export DOCKER_HUB_USER=<usuario>
+
+docker build -t $DOCKER_HUB_USER/app1:v0.1 .
+docker push $DOCKER_HUB_USER/app1:v0.1
+```
+- ¿cómo puede descargarla alguien más?
+
 ## Referencias
 - https://www.datacamp.com/blog/docker-commands
 - https://www.datacamp.com/blog/docker-container-images-for-machine-learning-and-ai
 - https://sliplane.io/blog/how-to-run-postgres-in-docker
+- https://www.docker.com/blog/how-to-use-the-postgres-docker-official-image/

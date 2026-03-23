@@ -1,6 +1,7 @@
 # MoviesSearch
 
-Sistema de búsqueda de películas por género y título. La app corre en un contenedor Docker en tu computadora local y
+Sistema de búsqueda de películas por género y título. La app corre en un
+contenedor Docker en tu computadora local y
 hace consultas a una base de datos RDS en AWS.
 
 En este demo aprenderás:
@@ -17,20 +18,24 @@ En este demo aprenderás:
 
 - Docker instalado
 - AWS CLI configurado con credenciales válidas en `~/.aws/credentials`
-- RDS con el dataset de MovieLens cargado (ver `scripts/setup-rds.sh` y `scripts/setup-movies-db.sh`)
+- RDS con el dataset de MovieLens cargado (ver `scripts/setup-rds.sh` y
+`scripts/setup-movies-db.sh`)
 
 ### Scripts
 
-Antes de crear la aplicación en el contenedor de docker, es necesario crear el recurso de la base de datos RDS
+Antes de crear la aplicación en el contenedor de docker, es necesario crear el
+recurso de la base de datos RDS
 y cargar el dataset de MovieLens.
 
 - `scripts/setup-rds.sh` — crea la instancia RDS en AWS
-- `scripts/setup-movies-db.sh` — crea la tabla movies y carga el dataset de MovieLens
+- `scripts/setup-movies-db.sh` — crea la tabla movies y carga el dataset de
+MovieLens
 - `scripts/setup-secrets.sh` — crea los secrets para RDS
 
 ## Demo 1: Docker
 
-Esta parte del demo se enfoca en la creación de la imagen de docker con el comando `build` y en el spin del contenedor
+Esta parte del demo se enfoca en la creación de la imagen de docker con el
+comando `build` y en el spin del contenedor
 con el comando `run`.
 
 Desde el directorio `demos/MoviesSearch`:
@@ -49,7 +54,8 @@ docker run \
 
 El subcomando `run` recibe los siguientes parámetros:
 - `-p`: expone un puerto del contenedor en el host machine
-- `-v`: monta el directorio de credenciales del host machine dentro del contenedor en modo solo lectura
+- `-v`: monta el directorio de credenciales del host machine dentro del
+contenedor en modo solo lectura
 - `-e`: pasa una variable de ambiente al contenedor
 
 Probar la app:
@@ -69,7 +75,8 @@ curl http://localhost:8080/health
 
 ## Demo 2: Docker Hub
 
-Para subir la imagen construida en la primera parte de este demo a Docker Hub es necesario tener cuenta primero y después hacer login.
+Para subir la imagen construida en la primera parte de este demo a Docker Hub es
+necesario tener cuenta primero y después hacer login.
 ```bash
 docker login
 ```
@@ -94,10 +101,13 @@ docker tag movies-search $DOCKER_HUB_USER/movies-search:v1.0
 docker push $DOCKER_HUB_USER/movies-search:v1.0
 ```
 
-Ahora hay que realizar un cambio en el código del contenedor, por ejemplo cambiar el `LIMIT` de las queries a `1`.
+Ahora hay que realizar un cambio en el código del contenedor, por ejemplo
+cambiar el `LIMIT` de las queries a `1`.
 
-Queremos actualizar la imagen de este proyecto en Docker Hub, pero como es una imagen diferente hay que actualizar su versión,
-esto se ve reflejado en la versión con la que etiquetamos la imagen y cuando hacemos el push.
+Queremos actualizar la imagen de este proyecto en Docker Hub, pero como es una
+imagen diferente hay que actualizar su versión,
+esto se ve reflejado en la versión con la que etiquetamos la imagen y cuando
+hacemos el push.
 ```bash
 # Reconstruir la imagen
 docker build -t movies-search .
@@ -111,7 +121,8 @@ docker push $DOCKER_HUB_USER/movies-search:latest
 docker push $DOCKER_HUB_USER/movies-search:v1.1
 ```
 
-Ahora si vamos a Docker Hub vamos a ver 3 tags. `latest` y `v1.1` son iguales y regresan la query con un `LIMIT 1`.
+Ahora si vamos a Docker Hub vamos a ver 3 tags. `latest` y `v1.1` son iguales y
+regresan la query con un `LIMIT 1`.
 `v1.0` es la versión anterior que regresa con el `LIMIT 20`.
 
 Es posible descargar una versión específica con:

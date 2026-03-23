@@ -12,3 +12,7 @@ SELECT * FROM TAREAS;
 
 
 ```
+
+https://www.datacamp.com/blog/docker-compose-vs-kubernetes
+https://www.datacamp.com/blog/docker-compose-vs-kubernetes
+https://www.datacamp.com/blog/kubernetes-vs-docker
