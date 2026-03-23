@@ -197,7 +197,9 @@ docker compose down -v
 
 ## 7. Docker Hub
 
-Vamos a empujar app1 a Docker Hub
+Vamos a empujar app1 a Docker Hub.
+
+Primero hazle una modificación para que la identifiques.
 
 ```
 export DOCKER_HUB_USER=<usuario>
