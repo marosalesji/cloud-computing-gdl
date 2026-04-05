@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: # nombre de tu aplicación
+spec:
+  replicas: # ¿cuántas instancias quieres correr?
+  selector:
+    matchLabels:
+      app: # debe coincidir con el label de abajo
+  template:
+    metadata:
+      labels:
+        app: # etiqueta para identificar los pods
+    spec:
+      containers:
+        - name: # nombre del contenedor
+          image: # tu imagen de Docker Hub, ej: usuario/app1:tag
+          ports:
+            - containerPort: # puerto en el que escucha la app
