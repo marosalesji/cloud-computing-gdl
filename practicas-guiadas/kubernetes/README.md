@@ -54,6 +54,9 @@ configurado automáticamente:
 kubectl get nodes
 ```
 
+- ¿cuántos nodos tenemos?
+- ¿tenemos control plane?
+
 ## Crear el Deployment
 
 En este directorio encontrarás dos templates para hacer el despliegue en el
@@ -166,3 +169,13 @@ curl http://<EXTERNAL-IP>:30080/tareas
 - ¿cuántos procesos de la aplicación están corriendo ahora mismo?
 - ¿dónde se está guardando las tareas?
 - ¿cómo lo resolverías?
+
+## Limpiar el ambiente
+
+Cuando termines la práctica elimina el cluster para no generar costos
+innecesarios. Este comando elimina todos los recursos que se crearon: nodos EC2,
+Security Groups y el control plane de EKS.
+
+```bash
+eksctl delete cluster --name practica-k8s --region us-east-1
+```
