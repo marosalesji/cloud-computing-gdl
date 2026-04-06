@@ -17,7 +17,7 @@ brew install weaveworks/tap/eksctl
 eksctl version
 ```
 
-### Windows (WSL con Ubuntu)
+### Windows (WSL con Ubuntu) y Linux
 
 ```bash
 curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_Linux_amd64.tar.gz"
@@ -127,7 +127,7 @@ http://<EXTERNAL-IP>:30080/tareas
 
 - ¿por qué funciona aunque accedas a cualquiera de los dos nodos?
 
-Agrega y borrar tareas usando el mecanismo para enviar HTTP requests que desees
+Agrega y borra tareas usando el mecanismo para enviar HTTP requests que desees
 (curl, /docs de FastAPI, postman).
 
 
