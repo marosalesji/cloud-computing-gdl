@@ -1,7 +1,7 @@
 import os
 import boto3
 
-BUCKET_NAME = os.environ.get("S3_BUCKET", "reporte-vuelos-demo")
+BUCKET_NAME = os.environ.get("S3_BUCKET", "reporte-vuelos-demo-260921")
 s3 = boto3.client("s3")
 
 def main(event, context):

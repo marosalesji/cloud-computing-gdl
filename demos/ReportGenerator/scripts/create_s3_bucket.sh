@@ -2,7 +2,7 @@
 set -e
 
 REGION=us-east-1
-BUCKET_NAME="reporte-vuelos-demo"
+BUCKET_NAME="reporte-vuelos-demo-260921"
 
 aws s3 mb s3://$BUCKET_NAME --region $REGION
 

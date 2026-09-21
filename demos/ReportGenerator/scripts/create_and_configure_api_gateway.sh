@@ -43,3 +43,8 @@ aws apigatewayv2 create-stage \
   --api-id "$API_ID" \
   --stage-name demo \
   --auto-deploy
+
+echo "API ID: $API_ID"
+aws apigatewayv2 get-apis \
+  --query "Items[?ApiId=='$API_ID'].{Id:ApiId,Name:Name,Endpoint:ApiEndpoint}" \
+  --output table
